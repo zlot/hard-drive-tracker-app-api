@@ -5,6 +5,10 @@
 # put       /api/harddrives/:id     update a specific harddrive by id
 
 
+get '/' do
+  redirect to('/index.html')
+end
+
 get '/api/harddrives' do
   return Harddrive.all.to_json
 end
