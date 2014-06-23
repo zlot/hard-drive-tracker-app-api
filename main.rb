@@ -5,12 +5,17 @@ require 'data_mapper'
 #configure sinatra
 configure :development do
   DataMapper::Logger.new($stdout, :debug)
-  DataMapper.setup(:default, 'sqlite:db/harddrivesapp.db')
   set :protection, :except => [:http_origin]
 end
 
 configure :production do
+end
+
+configure do
   DataMapper.setup(:default, 'sqlite:db/harddrivesapp.db')
+  #set :environment, "production"  # very important otherwise cannot connect to server, even on local network!
+  set :public_folder, File.dirname(__FILE__) + '/public/app'
+  set :port, 4568
 end
 
 # allow-origin on all returned responses.
